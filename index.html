@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 甄| 個人形象網頁</title>
+    <!-- Google Fonts for Japanese minimalist typography -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-cream: #f7f4ee;
+            --card-bg: #fdfcfb;
+            --text-brown: #5c534e;
+            --text-main: #3a3532;
+            --accent-pink: #dfc5bc;
+            --accent-pink-dark: #b8978c;
+            --border-color: #e6e0d5;
+            --transition-speed: 0.4s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Noto Serif TC', serif;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+        }
+
+        .japanese-serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* Vertical Text Style for Japanese aesthetic */
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 0.3em;
+        }
+
+        /* Hero Landing Section */
+        .hero-container {
+            min-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            padding: 2rem 0 4rem 0;
+        }
+
+        .hero-content-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content-wrap {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .hero-title-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .hero-vertical-tag {
+            font-size: 0.85rem;
+            color: var(--accent-pink-dark);
+            border-right: 1px solid var(--accent-pink);
+            padding-right: 1rem;
+            height: 180px;
+        }
+
+        .hero-main-title {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2.8rem;
+            font-weight: 300;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        .hero-main-title span {
+            color: var(--accent-pink-dark);
+        }
+
+        .hero-desc {
+            margin-top: 1.5rem;
+            color: var(--text-brown);
+            font-size: 0.95rem;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            align-items: center;
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--text-main);
+            padding: 0.85rem 2rem;
+            border-radius: 2px;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            border: 1px solid var(--text-main);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--card-bg);
+            border-color: var(--accent-pink-dark);
+            color: var(--accent-pink-dark);
+        }
+
+        /* --- 1. 調整圖片的容器，確保它隱藏溢出的部分 --- */
+        /* 1. 外框容器：隨圖片自動伸縮 */
+        .hero-image-box {
+            width: 100%;
+            /* 寬度填滿 */
+            max-width: 650px;
+            /* 限制最大寬度，您可以依喜好調大或調小 */
+            height: auto;
+            /* 💡 讓高度自動跟隨圖片，不再硬性限制 70vh */
+            margin: -4rem auto 0;
+            /* 水平置中 */
+            position: relative;
+            background-color: transparent;
+            /* 背景透明 */
+            border-radius: 1rem;
+            /* 保持圓角 */
+            box-shadow: 0 1rem 3rem rgba(92, 83, 78, 0.08);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* 2. 圖片本身：完整顯示不被裁切 */
+        .hero-image-box img {
+            width: 100%;
+            /* 寬度 100% 呈現 */
+            height: auto;
+            /* 💡 高度依比例自動計算，絕不變形、不裁切 */
+            display: block;
+            /* 消除圖片下方微小縫隙 */
+            object-fit: contain;
+            /* 💡 確保整張圖片包含在框內，文字完全保留 */
+        }
+
+
+        .hero-highlights {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .highlight-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .highlight-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            transition: transform var(--transition-speed);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .highlight-card h4 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .highlight-card p {
+            font-size: 0.85rem;
+            color: var(--text-brown);
+            line-height: 1.7;
+        }
+
+        /* Header & Navigation */
+        header {
+            width: 100%;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(247, 244, 238, 0.9);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.25em;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: opacity var(--transition-speed);
+        }
+
+        .logo:hover {
+            opacity: 0.7;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            color: var(--text-brown);
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-speed);
+        }
+
+        .nav-btn.active,
+        .nav-btn:hover {
+            color: var(--text-main);
+            border-bottom-color: var(--accent-pink-dark);
+        }
+
+        /* Mobile Menu Toggle Button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-main);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: absolute;
+                top: 5rem;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-cream);
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                padding: 2rem 0;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 10px 20px rgba(92, 83, 78, 0.05);
+                display: none;
+            }
+
+            nav.mobile-open {
+                display: flex;
+            }
+        }
+
+        /* Main Content Layout */
+        main {
+            flex-grow: 1;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Page 1: Home / About */
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .home-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .profile-card {
+            aspect-ratio: 4 / 5;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(92, 83, 78, 0.05);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(105%);
+        }
+
+        .about-content h1 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--text-brown);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .about-text {
+            color: var(--text-brown);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .stat-item .number {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .stat-item .label {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-brown);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--text-main);
+            color: var(--bg-cream);
+            padding: 0.85rem 2.5rem;
+            border-radius: 2px;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-pink-dark);
+        }
+
+        /* Page 2: Works / Portfolio */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 2.2rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .work-item {
+            cursor: pointer;
+        }
+
+        .work-img-wrap {
+            aspect-ratio: 16 / 10;
+            background-color: var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .work-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-item:hover .work-img-wrap img {
+            transform: scale(1.04);
+        }
+
+        .work-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(58, 53, 50, 0.15);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-item:hover .work-overlay {
+            opacity: 1;
+        }
+
+        .work-tag {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            padding: 0.5rem 1.2rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            border-radius: 2px;
+        }
+
+        .work-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .work-info h3 {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .work-info span {
+            font-size: 0.75rem;
+            color: var(--text-brown);
+            letter-spacing: 0.1em;
+        }
+
+        /* Page 3: Contact / Inquiry */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(92, 83, 78, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-brown);
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background-color: var(--bg-cream);
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: border-color var(--transition-speed);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-pink-dark);
+        }
+
+        .success-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: var(--accent-pink);
+            color: var(--text-main);
+            text-align: center;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+        }
+
+        /* Footer */
+        footer {
+            width: 100%;
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-brown);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" onclick="switchPage('home'); return false;" class="logo"> 甄/Hikari_12nail</a>
+            <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="切換導覽選單">☰</button>
+            <nav id="main-nav">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn active">首頁</button>
+                <button onclick="switchPage('about')" id="nav-about" class="nav-btn">關於我</button>
+                <button onclick="switchPage('works')" id="nav-works" class="nav-btn">精選作品</button>
+                <button onclick="switchPage('contact')" id="nav-contact" class="nav-btn">聯絡我</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- PAGE 0: 首頁 (Home / Landing) -->
+        <section id="page-home" class="page-section active">
+            <div class="hero-container">
+                <div class="hero-content-wrap">
+                    <div>
+                        <div class="hero-title-group">
+                            <span class="writing-vertical hero-vertical-tag">找到屬於自己的光</span>
+                            <div>
+                                <span class="subtitle">Personal Portfolio</span>
+                                <h1 class="hero-main-title">用設計找到靈感，<br>讓<span>創意</span>成為可能。</h1>
+
+                                <!-- 💡 請把「從指尖美學」這行移到這裡面來！ -->
+                                <p class="hero-subtitle"
+                                    style="color: var(--text-color); font-size: 1.25rem; font-weight: 500; margin-top: 1rem; margin-bottom: 0.5rem;">
+                                    從指尖美學，到 AI 數位創作。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-desc">
+                    結合穿戴美甲品牌經營、視覺設計與 AI 創作，將生活中的靈感轉化為具有美感與溫度的作品。<br>
+                    持續探索設計、內容與品牌之間的可能性。
+                </p>
+                </p>
+                <div class="hero-actions">
+                    <button onclick="switchPage('works')" class="btn-primary">瀏覽作品</button>
+                    <button onclick="switchPage('about')" class="btn-secondary">了解更多</button>
+                </div>
+            </div>
+
+            <div class="hero-image-box">
+                <img src="./images/香檳微光下的指尖之光 (1).png" alt="Hikari_12nail 主視覺">                
+            </div>         
+
+            <!-- Focus Areas -->
+            <div class="hero-highlights">
+                <span class="subtitle">Core Expertise</span>
+                <div class="highlight-grid">
+                    <div class="highlight-card">
+                        <h4>01 / 品牌與產品設計</h4>
+                        <p>從 Hikari_12nail 穿戴美甲品牌出發，結合品牌定位、視覺識別與產品美學，打造具有個人風格的品牌形象。</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>02 / 視覺設計行銷企劃</h4>
+                        <p>運用 Photoshop、Illustrator 製作品牌視覺、社群貼文與行銷素材，結合受眾需求與內容企劃，傳遞品牌價值。</p>
+                    </div>
+                    <div class="highlight-card">
+                        <h4>03 / AI 數位內容創作</h4>
+                        <p>結合 AI 圖像生成、短影音腳本與影片剪輯，整合創意發想與數位工具，將想法轉化為具有視覺吸引力的內容。</p>
+                    </div>
+                </div>
+            </div>           
+        </section>
+
+        <!-- PAGE 1: 關於我 (About) -->
+        <section id="page-about" class="page-section">
+            <div class="home-grid">
+                <div class="profile-card">
+                    <img src="./images/個人形象.png" alt="個人形象照">
+                </div>
+                <div class="about-content">
+                    <span class="subtitle">Creative Director & Designer</span>
+                    <h1>從指尖美學出發，<br>探索設計與創意的更多可能。</h1>
+                    <p class="about-text">
+                        你好，我是周家甄，從經營自己的穿戴美甲品牌開始，我逐漸發現，設計不只是呈現美感，更是將想法轉化為品牌價值的過程。
+                        我持續學習 Photoshop、Illustrator、Premiere Pro
+                        等設計與剪輯工具，並結合 AI 應用，探索視覺設計、品牌企劃與數位內容創作的可能性。
+                    </p>
+
+                    <p class="about-text">
+                        我相信，每一份創意都值得被好好呈現，也希望透過持續學習與實作，創作出兼具美感、溝通力與溫度的作品。
+
+                    </p>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: 精選作品 (Works / Portfolio) -->
+        <section id="page-works" class="page-section">
+            <div class="section-header">
+                <span class="subtitle">Selected Works</span>
+                <h2>AI精選作品集</h2>
+            </div>
+
+            <div class="works-grid">
+                <!-- Project 1 -->
+                <div class="work-item">
+                    <!-- 💡 用 a 標籤包住，target="_blank" 代表點擊後會在「新分頁」開啟完整大圖 -->
+                    <a href="./images/poater2.png" target="_blank" style="text-decoration: none; display: block;">
+                        <div class="work-img-wrap">
+                            <img src="./images/poater2.png" alt="海報設計"
+                                onerror="this.src='https://placeholder.co/800x500/e6e0d5/5c534e?text=Work+01'">
+                            <div class="work-overlay">
+                                <span class="work-tag">檢視大圖</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="work-info">
+                        <h3>海報設計</h3>
+                        <span> 2026/10</span>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <!-- Project 2 (調整畫面往上 & 保留全螢幕縮放) -->
+                <!-- Project 2 (YouTube 超連結縮圖專案) -->
+                <div class="work-item">
+                    <!-- 💡 將你的 YT 連結與封面截圖放進這裡 -->
+                    <a href="https://www.youtube.com/shorts/ppMq75uxN6Q" target="_blank"
+                        style="text-decoration: none; display: block;">
+                        <div class="work-img-wrap" style="position: relative; overflow: hidden;">
+                            <!-- 你的 YT 影片截圖封面 -->
+                            <img src="./images/慢慢開始AI創作截圖.png" alt="YouTube 影片"
+                                style="width: 100%; height: 100%; object-fit: cover; object-position: center 8%; display: block;">
+
+                            <!-- 懸浮遮罩（滑鼠移上去時顯示「觀看影片」或「YouTube」） -->
+                            <div class="work-overlay">
+                                <span class="work-tag">YouTube 觀看</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="work-info">
+                        <h3>AI結合真實故事短片</h3>
+                        <span>YouTube / 2026/09</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="work-item">
+                    <div class="work-img-wrap">
+                        <img src="./images/mockup.png" alt="器皿工藝"
+                            onerror="this.src='https://placehold.co/800x500/d9cec1/5c534e?text=Work+03'">
+                        <div class="work-overlay">
+                            <span class="work-tag">查看詳情</span>
+                        </div>
+                    </div>
+                    <div class="work-info">
+                        <h3>Mockup</h3>
+                        <span>2026/10</span>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <!-- Instagram 作品連結專案 -->
+                <div class="work-item">
+                    <!-- 💡 將 href 換成你的 IG 貼文或 Reels 網址 -->
+                    <a href="https://www.instagram.com/hikari_12nail/" target="_blank"
+                        style="text-decoration: none; display: block;">
+                        <div class="work-img-wrap" style="position: relative; overflow: hidden;">
+                            <!-- 放入你的 IG 封面截圖或照片 -->
+                            <img src="./images/IG穿戴甲美作品集網頁.JPG" alt="Instagram 創作"
+                                style="width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block;">
+
+                            <!-- 懸浮遮罩（滑鼠移上去時顯示「Instagram 觀看」） -->
+                            <div class="work-overlay">
+                                <span class="work-tag">Instagram 觀看</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="work-info">
+                        <h3>指尖美學動態日常</h3>
+                        <span>Instagram / 2026</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: 聯絡我 (Contact) -->
+        <section id="page-contact" class="page-section">
+            <div class="contact-container">
+                <div class="section-header" style="text-align: center;">
+                    <span class="subtitle">Get in Touch</span>
+                    <h2>聯絡我</h2>
+                </div>
+
+                <!-- Contact Form -->
+                <form onsubmit="handleFormSubmit(event)" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>姓名 / Name</label>
+                            <input type="text" required placeholder="請輸入您的姓名">
+                        </div>
+                        <div class="form-group">
+                            <label>電子郵件 / Email</label>
+                            <input type="email" required placeholder="name@example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>訊息內容 / Message</label>
+                        <textarea rows="4" required placeholder="請描述您的專案需求與預期時程..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; text-align: center;">發送訊息</button>
+                </form>
+
+                <div id="success-box" class="success-box">
+                    訊息已成功發送，我們將於 2 個工作日內回覆您。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 REN SATO. All Rights Reserved. Crafted with minimalist serenity.</p>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            // Hide all page sections
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+            // Show target section
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.add('active');
+            }
+
+            // Update navigation button active states
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeBtn = document.getElementById('nav-' + pageId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Close mobile menu if open
+            const nav = document.getElementById('main-nav');
+            if (nav) {
+                nav.classList.remove('mobile-open');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const nav = document.getElementById('main-nav');
+            if (nav) {
+                nav.classList.toggle('mobile-open');
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            form.reset();
+            const successBox = document.getElementById('success-box');
+            successBox.style.display = 'block';
+            setTimeout(() => {
+                successBox.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    </script>
+</body>
+
+</html>
